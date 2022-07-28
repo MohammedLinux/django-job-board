@@ -1,6 +1,7 @@
 from operator import mod
 from pyexpat import model
 from turtle import title
+from unicodedata import category
 from django.db import models
 
 # Create your models here.
@@ -16,9 +17,13 @@ class Job(models.Model):
     Vacncy = models.IntegerField(default=1)
     salary = models.BigIntegerField(default=0)
     experaince = models.IntegerField(default=1)
+    category =  models.ForeignKey('Category',on_delete=models.CASCADE)
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:   # Show Title in main Page
         return self.title
-
+class Category(models.Model):
+    name = models.CharField(max_length=25)    
+    def __str__(self) -> str:
+        return self.name
 
     
